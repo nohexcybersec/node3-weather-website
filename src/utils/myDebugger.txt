@@ -1,0 +1,47 @@
+1. use 'debugger' and inject anywhere in the code ; for example : ITS the BREAKPOINT
+u would then run it from cmdLINE as such "node inspect <filename>"
+
+const path = require('path')
+const express = require ('express')
+const { allowedNodeEnvironmentFlags } = require('process')
+
+console.log(__dirname)
+//console.log(__filename)
+console.log(path.join(__dirname, '../public'))
+
+
+debugger   <=============================
+
+
+const app = express()
+const publicDirectoryPath = path.join(__dirname, '../public')
+app.set('view engine', 'hbs')
+app.use(express.static(publicDirectoryPath))
+
+
+2. Using Chrome as our GUI Debugger : Type in the URL chrome://inspect
+    Then select the right Target; if Seeing nothing  click on Configure which 
+    will bring up another page and show you some values/devices and select else
+    you will have to add the device  : Chapter 5 Debugging Node.js@07:30
+
+    Once added click on inspect; will see a page and on the righ-hand side will see 
+    Debugger paused. 
+
+    Source and Console tab very important
+
+    You can also add your folders to the debugger to get access to the other code
+    ** A green icon will be on a folder highlighted whichis the active filename
+
+    ** Keep both the Source panel and Console panel open(*use the escape key to toggle)
+
+    You can see where the Debugger is PAUSED @ it is highlighted in BLUE
+
+    RESUME debugger by clicking on the play blue ICON; it will stop where we placed "Debugger"
+
+    TIP ** when running the program you will see a panel Scope on the righ-hand side then Local which
+        I can then dig in deeper   
+
+    
+    NOTE** The program is in <DEBUG> MODE so if you want to go thru it again just type 'restart' in the cmdLINE  "debug> restart"
+    ToSHUTDOWN  - hit cntrl-C x 2
+    

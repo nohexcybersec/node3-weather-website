@@ -1,0 +1,89 @@
+//Use Nodemon to RESTART the SERVER for example : nodemon app.js
+const path = require('path')
+//debugger   ///////////////////////////////////////////////// DEBUGGER 
+const express = require ('express')
+//const { allowedNodeEnvironmentFlags } = require('process')
+
+console.log(__dirname)
+console.log(__filename)
+console.log(path.join(__dirname, '..'))
+
+//debugger   ///////////////////////////////////////////////// DEBUGGER 
+
+
+const app = express()
+
+//const publicDirectoryPath = path.join(__dirname, '../public')
+//const publicDirectoryPath = path.join(__dirname, '..')
+//console.log('What is my DIRPATH = ' + publicDirectoryPath)
+const viewsPath = path.join(__dirname)
+// console.log('What is my viewsPath = ' + viewsPath)
+
+//app.set('views',viewsPath, 'views')
+app.set('views', path.join(__dirname, '../views')) //-------------------------------> this is what is diff
+//console.log("VIEWS PATH " + path.join(__dirname, '../views'))
+app.set('view engine', 'hbs')
+
+//app.use(express.static(__dirname + '../public'));
+//app.use(express.static(publicDirectoryPath))
+app.use(express.static(path.join(__dirname, '../public')))
+console.log('Static PATH =' + path.join(__dirname, '../public'))
+//app.use(express.static(path.join(__dirname + '../public')));
+
+
+app.get('', function (req, res) {
+    //throw new Error('BROKEN') // Express will catch this on its own.
+    res.render('index', {
+        title: 'WEATHER Passing Object to hbs', 
+        name: 'Marty'
+    })
+  })
+
+
+
+
+//app.com
+//app.com/help
+//app.com/about
+
+// app.get('', (req, res) => {
+//     res.send('<h1>Weather</h1>')
+// })
+
+
+// app.get('/help', (req, res) => {
+//     res.send([{
+//         name: 'Marty'       
+//     }, {
+//         name: 'Bob',  
+//         age: 49
+//     }])
+// })
+
+// app.get('/about', (req, res) => {
+//     res.send('<h1>About</h1>')
+// })
+
+
+// app.get('', (req, res) => {
+//     res.render('index', {
+//         title: 'Weather App', 
+//         name: 'Marty Martinez'
+//     })
+// })
+
+
+
+app.get('/weather', (req, res) => {
+    res.send([{
+        location: 'Melbourne'       
+    }, {
+        forecast: '8 degrees'
+    }])
+})
+
+// Need to start the SERVER and listen on a specific PORT, using port 3k which is a develeopment port
+
+app.listen(3000, () => {
+    console.log('Server is up on port 3000')
+})
