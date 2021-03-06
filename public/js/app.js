@@ -45,12 +45,14 @@ const messageTwo = document.querySelector('#message-2')
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
     const location = search.value
-    console.log('WHAT is MY location = ' + location)
+
+    console.log('JS:app.js file : WHAT is MY location SEARCH value= ' + location)
     messageOne.textContent = 'Loading ...'
     messageTwo.textContent = ''
 
 
-        fetch('http://127.0.0.1:3000/weather?address=' + location).then((response) => {
+        fetch('http://127.0.0.1:3000/weather?address='+location).then((response) => {
+            //console.log('JS:app.js file : WHAT is MY location SEARCH value after FETCH= ' + location)
         response.json().then((data) => {
             if(data.error){
                 console.log(data.error)

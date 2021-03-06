@@ -13,8 +13,6 @@ const app = express()
 
 //setup handlebars engine and views location
 app.set('views', path.join(__dirname, '../templates/views')) 
-//app.set('views', path.join(__dirname, '../templates/partials')) 
-//app.set('views', path.join(__dirname, '../views')) 
 app.set('view engine', 'hbs')
 hbs.registerPartials(path.join(__dirname, '../templates/partials'))
 
@@ -43,14 +41,6 @@ app.get('', function (req, res) {
  })
 })
 
-// app.get('/weather', (req, res) => {
-//     res.send([{
-//         location: 'Melbourne'       
-//     }, {
-//         forecast: '8 degrees'
-//     }])
-// })
-
 
 app.get('/weather',(req, res)  => {
     if(!req.query.address){
@@ -58,19 +48,22 @@ app.get('/weather',(req, res)  => {
             error: 'you must provide an address'
         })
     }
-        geocode(req.query.address, (error, {lattitude, longitude, location} = {}) => {
+        geocode(req.query.address, (error, data) =>{
             if(error){
                 return res.send({error})
             }
 
-            forecast(lattitude, longitude, (error, forecastData) => {
+            forecast(data.latitude, data.longitude, (error, data) =>{
+            
+                console.log('MY DATA JSON = ' + data)
                 if(error){
                     return res.send({error})
                 }
 
                 res.send({
-                    forecast: forecastData,
-                    location,
+
+                    forecast: data,
+                    //location,
                     address: req.query.address
 
                 })
@@ -79,6 +72,18 @@ app.get('/weather',(req, res)  => {
         })
    
 })
+
+
+// geocode('Tampa', (error, data) =>{
+//     console.log('in SRC/APP.JS function geocode, data returned  =  ', data)
+//     console.log('in SRC/APP.JS geocode, data.lattitude  returned  =    ', data.latitude )
+//     console.log('in SRC/APP.JS  geocode, data.longtitude  returned  =    ', data.longitude )
+
+//     forecast(data.latitude, data.longitude, (error, data) =>{
+//         console.log('in SRC/APP.JS function forecast, data returned  =    ', data )
+//     })
+
+// })
 
 
 
