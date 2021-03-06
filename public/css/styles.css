@@ -25,6 +25,13 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+    /* background-image: url("doggy.jpeg");
+    background-repeat: no-repeat;
+    background-position: left top; */
+    /* background-image: url("img/robot.png"); */
+    background-color: #e4e5e2;
+
 }
 
 
