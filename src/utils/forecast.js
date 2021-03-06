@@ -11,11 +11,7 @@ const forecast = (lattitude=40, longitude, callback) =>{
         }else if (body.error){
             callback('Forecast : Unable to find location, try again', undefined)
         }else {
-            // callback(undefined, 'LOCATION = '+ body.location.name + ', ' + body.location.region + ', ' +body.location.country +'\n'+
-            // ' Weather Description = \n'+ body.current.weather_descriptions[0] + '.  The current Temp = '+ body.current.temperature +
-            // ' degrees' + '  BUT it FEELS like = ' + body.current.feelslike + ' degrees OUT')
-            callback(undefined, '\n'+ body.location.name + ', ' + body.location.region + '|'+ body.current.weather_descriptions[0] + '|'+ ' Temp is '+ body.current.temperature +' degrees' + '  feels like  = ' + body.current.feelslike + ' degrees')
-            
+            callback(undefined,  body.current.weather_descriptions[0] + '|'+ ' Temp is '+ body.current.temperature +' degrees' + '  feels like  = ' + body.current.feelslike + ' degrees')
         }
     })
 }

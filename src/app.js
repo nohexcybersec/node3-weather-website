@@ -42,36 +42,36 @@ app.get('', function (req, res) {
 })
 
 
-app.get('/weather',(req, res)  => {
-    if(!req.query.address){
-        return res.send({
-            error: 'you must provide an address'
-        })
-    }
-        geocode(req.query.address, (error, data) =>{
-            if(error){
-                return res.send({error})
-            }
+// app.get('/weather',(req, res)  => {
+//     if(!req.query.address){
+//         return res.send({
+//             error: 'you must provide an address'
+//         })
+//     }
+//         geocode(req.query.address, (error, data) =>{
+//             if(error){
+//                 return res.send({error})
+//             }
 
-            forecast(data.latitude, data.longitude, (error, data) =>{
+//             forecast(data.latitude, data.longitude, (error, data) =>{
             
-                console.log('MY DATA JSON = ' + data)
-                if(error){
-                    return res.send({error})
-                }
+//                 console.log('MY DATA JSON = ' + data)
+//                 if(error){
+//                     return res.send({error})
+//                 }
 
-                res.send({
+//                 res.send({
 
-                    forecast: data,
-                    //location,
-                    address: req.query.address
+//                     forecast: data,
+//                     //location,
+//                     address: req.query.address
 
-                })
+//                 })
 
-            })
-        })
+//             })
+//         })
    
-})
+// })
 
 
 // geocode('Tampa', (error, data) =>{
@@ -84,6 +84,40 @@ app.get('/weather',(req, res)  => {
 //     })
 
 // })
+
+
+
+app.get('/weather',(req, res)  => {
+    if(!req.query.address){
+        return res.send({
+            error: 'you must provide an address'
+        })
+    }
+        geocode(req.query.address, (error, { latitude, longitude, location}) =>{
+            if(error){
+                return res.send({error})
+            }
+
+            forecast(latitude, longitude, (error, forecastData) =>{
+            
+               // console.log('MY DATA JSON = ' + forecastData)
+                if(error){
+                    return res.send({error})
+                }
+
+                res.send({
+
+                    forecast: forecastData,
+                    location,
+                    address: req.query.address
+
+                })
+
+            })
+        })
+   
+})
+
 
 
 
