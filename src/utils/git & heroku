@@ -1,0 +1,6 @@
+git status 
+git add .   // this adds to the staging environment  
+git commit -m "Type version and message here"
+git push   // push up to git hub remotely
+git push heroku master
+
