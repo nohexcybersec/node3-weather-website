@@ -2,10 +2,10 @@ const request = require('request')
 
 const forecast = (lattitude=40, longitude, callback) =>{
     //const url = 'http://api.weatherstack.com/current?access_key=01a27500bfe89b60cb4d92e2462d4c46&query=37.8267,-122.4233'
-    const url = 'http://api.weatherstack.com/current?access_key=01a27500bfe89b60cb4d92e2462d4c46&query='+ lattitude + ',' + longitude + '&units=f'
+    const url = 'http://api.weatherstack.com/current?access_key=01a27500bfe89b60cb4d92e2462d4c46&query='+ lattitude + ',' + longitude + '&units=m'
    
     request({url, json: true}, (error, {body}) => {
-        //console.log('FORECAST: myBody',body)
+        console.log('FORECAST: myBody',body)
         if(error){
             callback('Unable to Connect', undefined)
         }else if (body.error){
